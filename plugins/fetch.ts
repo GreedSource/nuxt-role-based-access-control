@@ -12,10 +12,10 @@ export default defineNuxtPlugin((_nuxtApp) => {
     onResponseError({ response }) {
       const refreshToken = useCookie("Refresh");
       if (response.status === 401) {
-        $toast.info(
-          "Your session has expired. We're refreshing it for you. Please wait a moment."
-        );
-        if (refreshToken.value) {
+        if (refreshToken.value && refreshToken.value.length > 0) {
+          $toast.info(
+            "Your session has expired. We're refreshing it for you. Please wait a moment."
+          );
           $fetch("/auth/refresh", {
             method: "POST",
             baseURL: runtimeConfig.public.baseUrl,
@@ -31,11 +31,9 @@ export default defineNuxtPlugin((_nuxtApp) => {
                 "Oops! Something went wrong while refreshing your session. Please log in again"
               );
               $reset();
+              navigateTo("/account/login");
             });
         } else {
-          $toast.error(
-            "Oops! Something went wrong while refreshing your session. Please log in again"
-          );
           $reset();
           navigateTo("/account/login");
         }
