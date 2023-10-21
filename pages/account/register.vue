@@ -1,6 +1,12 @@
 <script setup>
 import { reset } from "@formkit/core";
 
+useHead({
+  titleTemplate: (titleChunk) => {
+    return titleChunk ? `${titleChunk} - Register` : 'Register';
+  }
+})
+
 const isPasswordValid = ref(false);
 const isEmptyPassword = ref(true);
 const hasMinLength = ref(false);
@@ -38,7 +44,6 @@ const handleIconClick = (node, e) => {
 };
 </script>
 <template>
-  {{ isPasswordValid }}
   <div class="my-32 w-96 mx-auto">
     <h1 class="text-center text-2xl font-bold mb-5">Account</h1>
     <FormKit
@@ -111,5 +116,10 @@ const handleIconClick = (node, e) => {
         validation="required"
       />
     </FormKit>
+
+    <i class="text-gray-700 text-sm">
+      Already have an Account?
+      <NuxtLink href="/account/login" class="text-blue-500 hover:text-blue-700">Login</NuxtLink>
+    </i>
   </div>
 </template>

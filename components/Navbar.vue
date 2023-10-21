@@ -1,6 +1,9 @@
 <script setup>
-const isAuthenticated = ref(false);
-const isMobileMenuOpen = ref(false);
+import { useAuthStore } from "@/store/auth";
+import { storeToRefs } from "pinia";
+const authStore = useAuthStore();
+const { isAuthenticated } = storeToRefs(authStore);
+const isMobileMenuOpen = ref(null);
 </script>
 
 <template>
@@ -8,42 +11,47 @@ const isMobileMenuOpen = ref(false);
     <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center justify-between w-full">
-          <div class="flex-shrink-0">
-            <a href="/" class="text-white font-bold text-xl">
-              Role Based Access Control
-            </a>
-          </div>
-          <div class="hidden md-block">
-            <div class="ml-10 flex items-baseline">
-              <NuxtLink
-                to="/"
-                class="px-3 py-2 rounded-md text-sm font-medium text-white hover:text-gray-300"
-                >Home
-              </NuxtLink>
-              <NuxtLink
-                to="/books"
-                class="px-3 py-2 rounded-md text-sm font-medium text-white hover:text-gray-300"
-                >Books
-              </NuxtLink>
-              <NuxtLink
-                to="#"
-                v-if="isAuthenticated"
-                class="px-3 py-2 rounded-md text-sm font-medium text-white hover:text-gray-300"
-                >Dashboard
-              </NuxtLink>
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <a href="/" class="text-white font-bold text-xl">
+                Role Based Access Control
+              </a>
+            </div>
+            <div class="hidden md:block">
+              <div class="ml-10 flex items-baseline">
+                <NuxtLink
+                  to="/"
+                  class="px-4 py-2 rounded-md text-sm font-medium text-white hover:text-gray-300"
+                  >Home
+                </NuxtLink>
+                
+                <NuxtLink
+                  to="/user/dashboard"
+                  v-if="isAuthenticated"
+                  class="px-4 py-2 rounded-md text-sm font-medium text-white hover:text-gray-300"
+                  >Dashboard
+                </NuxtLink>
+                <NuxtLink
+                  to="/books"
+                  class="px-4 py-2 rounded-md text-sm font-medium text-white hover:text-gray-300"
+                  >Books
+                </NuxtLink>
+              </div>
             </div>
           </div>
-          <template v-if="!isAuthenticated" >
-            <div class="ml-4 flex items-center md:ml-6 justify-end">
+          <template v-if="!isAuthenticated">
+            <div
+              class="ml-4 flex items-center md:ml-6 justify-end hidden md:block"
+            >
               <NuxtLink
-                class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
-                to="#"
+                class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded w-full"
+                to="/account/login"
               >
                 Login
               </NuxtLink>
               <NuxtLink
                 class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 ml-4 rounded"
-                to="#"
+                to="/account/register"
               >
                 Register
               </NuxtLink>
