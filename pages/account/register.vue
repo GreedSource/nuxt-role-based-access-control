@@ -3,9 +3,9 @@ import { reset } from "@formkit/core";
 
 useHead({
   titleTemplate: (titleChunk) => {
-    return titleChunk ? `${titleChunk} - Register` : 'Register';
-  }
-})
+    return titleChunk ? `${titleChunk} - Register` : "Register";
+  },
+});
 
 const isPasswordValid = ref(false);
 const isEmptyPassword = ref(true);
@@ -29,14 +29,14 @@ const validatePassword = (value) => {
 
 const handleSubmit = async (data) => {
   if (!isPasswordValid) return;
-  const {image, ...payload} = data;
+  const { image, ...payload } = data;
   const body = new FormData();
-  const [file] = image
-  body.append('image', file)
-  for(const key in payload){
+  const [file] = image;
+  body.append("image", file);
+  for (const key in payload) {
     body.append(key, payload[key]);
   }
-    reset("register-form");
+  reset("register-form");
 };
 const handleIconClick = (node, e) => {
   node.props.suffixIcon = node.props.suffixIcon === "eye" ? "eyeClosed" : "eye";
@@ -119,7 +119,9 @@ const handleIconClick = (node, e) => {
 
     <i class="text-gray-700 text-sm">
       Already have an Account?
-      <NuxtLink href="/account/login" class="text-blue-500 hover:text-blue-700">Login</NuxtLink>
+      <NuxtLink href="/account/login" class="text-blue-500 hover:text-blue-700"
+        >Login</NuxtLink
+      >
     </i>
   </div>
 </template>
