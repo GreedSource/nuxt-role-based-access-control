@@ -20,6 +20,6 @@ export default defineNuxtConfig({
   ],
   css: ["vue-toast-notification/dist/theme-default.css"],
   routeRules: {
-    "/api/**": { proxy: { to: "http://localhost:3337/api/**" } },
+    // "/api/**": { proxy: { to: "http://localhost:3200/api/**" } },
   },
 });

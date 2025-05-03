@@ -8,3 +8,5 @@ services:
       - "${NODE_PORT}:${NODE_PORT}"
     env_file:
       - .env
+    environment:
+      BACKEND_URI: http://localhost:3200/api

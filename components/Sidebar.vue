@@ -9,11 +9,11 @@ const onLogout = async () => {
     baseURL: runtimeConfig.public.baseUrl,
     method: "DELETE",
     body:{}
-  }).then((response)=>console.log(response)).catch((e) => $toast.error("Something went wrong!!"));
-  $reset()
-  await navigateTo("/account/login", {
+  }).then(()=> navigateTo("/account/login", {
     replace: true,
-  });
+  })).catch(() => $toast.error("Something went wrong!!"));
+  $reset()
+  
 };
 </script>
 
